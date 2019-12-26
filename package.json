@@ -22,9 +22,11 @@
   },
   "homepage": "https://github.com/georgesimos/nodejs-starter#readme",
   "dependencies": {
+    "chalk": "^3.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-status-monitor": "^1.2.7",
+    "mongoose": "^5.8.3",
     "morgan": "^1.9.1"
   },
   "devDependencies": {

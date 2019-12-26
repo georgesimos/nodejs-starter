@@ -20,6 +20,11 @@ if (process.env.NODE_ENV !== 'production') {
 /* Init express server */
 const app = express();
 
+/**
+ * Connect to MongoDB.
+ */
+require('./config/mongoose');
+
 /* Here we setup the middlewares & configs */
 
 app.use(logger('dev'));
@@ -32,6 +37,9 @@ app.use((req, res, next) => {
   res.locals.user = req.user;
   next();
 });
+
+/* Here we define the api routes */
+app.use(require('./routes/users'));
 
 const port = process.env.PORT || 8080;
 const address = process.env.SERVER_ADDRESS || 'localhost';
