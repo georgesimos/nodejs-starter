@@ -1,0 +1,43 @@
+{
+  "name": "nodejs-starter",
+  "version": "1.0.0",
+  "description": "Nodejs Starter - A boilerplate for Node.js web applications",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon start",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier-eslint \"**/*.{js,json}\" --write",
+    "lint": "eslint \"**/*.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/georgesimos/nodejs-starter.git"
+  },
+  "keywords": [],
+  "author": "George Simos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/georgesimos/nodejs-starter/issues"
+  },
+  "homepage": "https://github.com/georgesimos/nodejs-starter#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-node": "^4.0.0",
+    "eslint-config-prettier": "^6.8.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1"
+  }
+}
