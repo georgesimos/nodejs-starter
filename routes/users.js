@@ -46,13 +46,25 @@ router.get('/users/:id', auth, async (req, res) => {
 
 /* Update logged in user */
 router.patch('/users/me', auth, async (req, res) => {
+  const validationErrors = [];
+  const updates = Object.keys(req.body);
+  const profileUpdates = ['name', 'gender', 'location', 'website'];
+  const allowedUpdates = ['email', 'password', 'role', ...profileUpdates];
+  const isValidOperation = updates.every(update => {
+    const isValid = allowedUpdates.includes(update);
+    if (!isValid) validationErrors.push(update);
+    return isValid;
+  });
+
+  if (!isValidOperation)
+    return res.status(400).send({ error: `Invalid updates: ${validationErrors.join(',')}` });
+
   try {
     const { user } = req;
-    user.email = req.body.email || '';
-    user.profile.name = req.body.name || '';
-    user.profile.gender = req.body.gender || '';
-    user.profile.location = req.body.location || '';
-    user.profile.website = req.body.website || '';
+    updates.forEach(update => {
+      if (profileUpdates.includes(update)) user.profile[update] = req.body[update];
+      user[update] = req.body[update];
+    });
 
     await user.save();
     res.send(user);
