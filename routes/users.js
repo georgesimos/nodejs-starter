@@ -67,9 +67,9 @@ router.patch('/users/me', auth, async (req, res) => {
     });
 
     await user.save();
-    res.send(user);
+    return res.send(user);
   } catch (e) {
-    res.status(400).send(e);
+    return res.status(400).send(e);
   }
 });
 

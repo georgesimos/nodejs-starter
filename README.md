@@ -1,1 +1,71 @@
-# nodejs-starter
+<h1 align="center">
+nodejs-starter
+</h1>
+<p align="center">
+MongoDB, Expressjs, Nodejs
+</p>
+
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/georgesimos/nodejs-starter/blob/master/LICENSE)
+
+Nodejs Starter is a boilerplate for Node.js web applications built with:
+
+- [MongoDB](https://www.mongodb.com/) - A document-oriented, No-SQL database used to store the application data.
+- [ExpressJS](https://expressjs.com/) - fast node.js network app framework.
+- [nodeJS](https://nodejs.org/) - A JavaScript runtime built on Chrome's V8 JavaScript engine
+- Authentication with jsonwebtoken
+
+## Features
+
+- **Authentication** using Email and Password
+- Add / Update / Delete Users
+
+## Getting Started
+
+clone the repository
+
+```sh
+$ git clone https://github.com/georgesimos/nodejs-starter.git myproject
+$ cd myproject
+```
+
+Install the dependencies and devDependencies
+
+```sh
+$ npm install
+```
+
+Set environment variables
+
+```sh
+Create a .env file in your root folder
+See the .env sample
+```
+
+Start the server
+
+```sh
+$ npm start
+$ npm run dev # with nodemon live update
+```
+
+## Plugins
+
+nodejs-starter is currently extended with the following plugins. Instructions on how to use them in your own application are linked below.
+
+## Server
+
+| Plugin       | README                                                                                             |
+| ------------ | -------------------------------------------------------------------------------------------------- |
+| bcryptjs     | [plugins/bcryptjs/README.md](https://github.com/dcodeIO/bcrypt.js/blob/master/README.md)           |
+| express      | [plugins/express/README.md](https://github.com/expressjs/express/blob/master/Readme.md)            |  |
+| jsonwebtoken | [plugins/jsonwebtoken/README.md](https://github.com/auth0/node-jsonwebtoken/blob/master/README.md) |
+| mongoose     | [plugins/mongoose/README.md](https://github.com/Automattic/mongoose/blob/master/README.md)         |
+| nodemon      | [plugins/nodemon/README.md](https://github.com/remy/nodemon/blob/master/README.md)                 |
+
+## Todos
+
+- Write Tests
+
+## License
+
+MIT
