@@ -3,7 +3,7 @@ const User = require('../models/User');
 const auth = require('../config/auth');
 
 /* Create a user */
-router.post('/users', async (req, res) => {
+router.post('/users', auth, async (req, res) => {
   const user = new User(req.body);
   try {
     await user.save();
@@ -15,7 +15,7 @@ router.post('/users', async (req, res) => {
 });
 
 /* Get all users */
-router.get('/users', async (req, res) => {
+router.get('/users', auth, async (req, res) => {
   try {
     const users = await User.find({});
     res.send(users);
