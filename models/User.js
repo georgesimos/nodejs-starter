@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 
 const { Schema } = mongoose;
 
@@ -21,6 +22,7 @@ const userSchema = Schema(
       website: String,
       picture: String,
     },
+    tokens: [{ token: { type: String, required: true } }],
   },
   { timestamps: true }
 );
@@ -39,6 +41,17 @@ userSchema.methods.toJSON = function() {
   delete userObject.tokens;
 
   return userObject;
+};
+
+/**
+ * Helper method for generating Auth Token
+ */
+userSchema.methods.generateAuthToken = async function() {
+  const user = this;
+  const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET);
+  user.tokens = user.tokens.concat({ token });
+  await user.save();
+  return token;
 };
 
 const User = mongoose.model('User', userSchema);
