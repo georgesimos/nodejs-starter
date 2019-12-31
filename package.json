@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/georgesimos/nodejs-starter#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "chalk": "^3.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
