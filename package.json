@@ -22,10 +22,12 @@
   },
   "homepage": "https://github.com/georgesimos/nodejs-starter#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "chalk": "^3.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-status-monitor": "^1.2.7",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.3",
     "morgan": "^1.9.1"
   },
