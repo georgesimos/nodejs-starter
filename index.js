@@ -25,8 +25,7 @@ const app = express();
  */
 require('./config/mongoose');
 
-/* Here we setup the middlewares & configs */
-
+/* Middlewares & configs setup */
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

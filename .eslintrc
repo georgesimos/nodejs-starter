@@ -19,6 +19,7 @@
     "no-console": "off",
     "func-names": "off",
     "no-process-exit": "off",
+    "no-underscore-dangle": [2, { "allow": ["__v"] }],
     "object-shorthand": "off",
     "class-methods-use-this": "off"
   }
