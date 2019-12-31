@@ -23,7 +23,7 @@ const userSchema = Schema(
       website: String,
       picture: String,
     },
-    tokens: [{ token: { type: String, required: true }, expired: Number }],
+    tokens: [{ token: { type: String, required: true } }],
   },
   { timestamps: true }
 );
@@ -60,11 +60,10 @@ userSchema.methods.toJSON = function() {
  */
 userSchema.methods.generateAuthToken = async function() {
   const user = this;
-  const expired = Math.floor(Date.now() / 1000) + 20 * 60;
-  const token = jwt.sign({ _id: user._id.toString(), iat: expired }, process.env.JWT_SECRET);
-  user.tokens = user.tokens.concat({ token, expired });
+  const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  user.tokens = user.tokens.concat({ token });
   await user.save();
-  return { token, expired };
+  return token;
 };
 
 /**
