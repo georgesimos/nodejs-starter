@@ -37,8 +37,7 @@ $ npm install
 Set environment variables
 
 ```sh
-Create a .env file in your root folder
-See the .env sample
+cp .env.example .env
 ```
 
 Start the server
