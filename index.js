@@ -11,6 +11,7 @@ const express = require('express');
 const logger = require('morgan');
 const dotenv = require('dotenv');
 const expressStatusMonitor = require('express-status-monitor');
+const connectDB = require('./config/mongoose');
 
 /* Make all variables from our .env file available in our process */
 if (process.env.NODE_ENV !== 'production') {
@@ -23,7 +24,7 @@ const app = express();
 /**
  * Connect to MongoDB.
  */
-require('./config/mongoose');
+connectDB();
 
 /* Middlewares & configs setup */
 app.use(logger('dev'));
