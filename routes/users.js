@@ -2,7 +2,11 @@ const router = require('express').Router();
 const User = require('../models/User');
 const auth = require('../config/auth');
 
-/* Create a user */
+/**
+ * @route   POST /users
+ * @desc    Register new user
+ * @access  Public
+ */
 router.post('/users', async (req, res) => {
   const user = new User(req.body);
   try {
@@ -14,7 +18,11 @@ router.post('/users', async (req, res) => {
   }
 });
 
-/* Get all users */
+/**
+ * @route   GET /users
+ * @desc    Get all users
+ * @access  Private
+ */
 router.get('/users', auth, async (req, res) => {
   try {
     const users = await User.find({});
@@ -24,7 +32,11 @@ router.get('/users', auth, async (req, res) => {
   }
 });
 
-/* Get logged in user details */
+/**
+ * @route   GET /users/me
+ * @desc    Get logged in user details
+ * @access  Private
+ */
 router.get('/users/me', auth, async (req, res) => {
   try {
     res.send(req.user);
@@ -33,7 +45,11 @@ router.get('/users/me', auth, async (req, res) => {
   }
 });
 
-/* Get user by id */
+/**
+ * @route   GET /users/:id
+ * @desc    Get user by id
+ * @access  Private
+ */
 router.get('/users/:id', auth, async (req, res) => {
   try {
     const { id } = req.params;
@@ -44,7 +60,11 @@ router.get('/users/:id', auth, async (req, res) => {
   }
 });
 
-/* Update logged in user */
+/**
+ * @route   PATCH /users/me
+ * @desc    Update logged in user
+ * @access  Private
+ */
 router.patch('/users/me', auth, async (req, res) => {
   const validationErrors = [];
   const updates = Object.keys(req.body);
@@ -73,7 +93,11 @@ router.patch('/users/me', auth, async (req, res) => {
   }
 });
 
-/* Update user by id */
+/**
+ * @route   PATCH /users/:id
+ * @desc    Update user by id
+ * @access  Private
+ */
 router.patch('/users/:id', auth, async (req, res) => {
   const validationErrors = [];
   const updates = Object.keys(req.body);
@@ -104,7 +128,11 @@ router.patch('/users/:id', auth, async (req, res) => {
   }
 });
 
-/* Delete logged in user */
+/**
+ * @route   DELETE /users/me
+ * @desc    Delete logged in user
+ * @access  Private
+ */
 router.delete('/users/me', auth, async (req, res) => {
   try {
     await req.user.remove();
@@ -114,7 +142,11 @@ router.delete('/users/me', auth, async (req, res) => {
   }
 });
 
-/* Delete user by id */
+/**
+ * @route   DELETE /users/:id
+ * @desc    Delete user by id
+ * @access  Private
+ */
 router.delete('/users/:id', auth, async (req, res) => {
   const _id = req.params.id;
   try {
@@ -127,7 +159,11 @@ router.delete('/users/:id', auth, async (req, res) => {
   }
 });
 
-/* Login User */
+/**
+ * @route   POST /users/login
+ * @desc    Login a user
+ * @access  Public
+ */
 router.post('/users/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -141,7 +177,11 @@ router.post('/users/login', async (req, res) => {
   }
 });
 
-/* Logout user */
+/**
+ * @route   POST /users/logout
+ * @desc    Logout a user
+ * @access  Private
+ */
 router.post('/users/logout', auth, async (req, res) => {
   const { user } = req;
   try {
@@ -155,7 +195,11 @@ router.post('/users/logout', auth, async (req, res) => {
   }
 });
 
-/* Logout user from all devices */
+/**
+ * @route   POST /users/logoutAll
+ * @desc    Logout a user from all devices
+ * @access  Private
+ */
 router.post('/users/logoutAll', auth, async (req, res) => {
   try {
     req.user.tokens = [];
