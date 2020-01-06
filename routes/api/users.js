@@ -1,13 +1,13 @@
 const router = require('express').Router();
-const User = require('../models/User');
-const auth = require('../config/auth');
+const User = require('../../models/User');
+const auth = require('../../config/auth');
 
 /**
  * @route   POST /users
  * @desc    Register new user
  * @access  Public
  */
-router.post('/users', async (req, res) => {
+router.post('/', async (req, res) => {
   const user = new User(req.body);
   try {
     await user.save();
@@ -23,7 +23,7 @@ router.post('/users', async (req, res) => {
  * @desc    Get all users
  * @access  Private
  */
-router.get('/users', auth, async (req, res) => {
+router.get('/', auth, async (req, res) => {
   try {
     const users = await User.find({});
     res.send(users);
@@ -37,7 +37,7 @@ router.get('/users', auth, async (req, res) => {
  * @desc    Get logged in user details
  * @access  Private
  */
-router.get('/users/me', auth, async (req, res) => {
+router.get('/me', auth, async (req, res) => {
   try {
     res.send(req.user);
   } catch (e) {
@@ -50,7 +50,7 @@ router.get('/users/me', auth, async (req, res) => {
  * @desc    Get user by id
  * @access  Private
  */
-router.get('/users/:id', auth, async (req, res) => {
+router.get('/:id', auth, async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id);
@@ -65,7 +65,7 @@ router.get('/users/:id', auth, async (req, res) => {
  * @desc    Update logged in user
  * @access  Private
  */
-router.patch('/users/me', auth, async (req, res) => {
+router.patch('/me', auth, async (req, res) => {
   const validationErrors = [];
   const updates = Object.keys(req.body);
   const profileUpdates = ['name', 'gender', 'location', 'website'];
@@ -98,7 +98,7 @@ router.patch('/users/me', auth, async (req, res) => {
  * @desc    Update user by id
  * @access  Private
  */
-router.patch('/users/:id', auth, async (req, res) => {
+router.patch('/:id', auth, async (req, res) => {
   const validationErrors = [];
   const updates = Object.keys(req.body);
   const profileUpdates = ['name', 'gender', 'location', 'website'];
@@ -133,7 +133,7 @@ router.patch('/users/:id', auth, async (req, res) => {
  * @desc    Delete logged in user
  * @access  Private
  */
-router.delete('/users/me', auth, async (req, res) => {
+router.delete('/me', auth, async (req, res) => {
   try {
     await req.user.remove();
     res.send({ message: 'User Deleted' });
@@ -147,7 +147,7 @@ router.delete('/users/me', auth, async (req, res) => {
  * @desc    Delete user by id
  * @access  Private
  */
-router.delete('/users/:id', auth, async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
   const _id = req.params.id;
   try {
     const user = await User.findByIdAndDelete(_id);
@@ -164,7 +164,7 @@ router.delete('/users/:id', auth, async (req, res) => {
  * @desc    Login a user
  * @access  Public
  */
-router.post('/users/login', async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findByCredentials(email, password);
@@ -182,7 +182,7 @@ router.post('/users/login', async (req, res) => {
  * @desc    Logout a user
  * @access  Private
  */
-router.post('/users/logout', auth, async (req, res) => {
+router.post('/logout', auth, async (req, res) => {
   const { user } = req;
   try {
     user.tokens = user.tokens.filter(token => {
@@ -200,7 +200,7 @@ router.post('/users/logout', auth, async (req, res) => {
  * @desc    Logout a user from all devices
  * @access  Private
  */
-router.post('/users/logoutAll', auth, async (req, res) => {
+router.post('/logoutAll', auth, async (req, res) => {
   try {
     req.user.tokens = [];
     await req.user.save();
