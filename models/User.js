@@ -6,22 +6,13 @@ const { Schema } = mongoose;
 
 const userSchema = Schema(
   {
+    name: String,
     email: { type: String, unique: true },
-    emailVerified: Boolean,
     password: String,
-    facebook: String,
-    google: String,
     role: {
       type: String,
       default: 'guest',
       enum: ['guest', 'admin', 'superadmin'],
-    },
-    profile: {
-      name: String,
-      gender: String,
-      location: String,
-      website: String,
-      picture: String,
     },
     tokens: [{ token: { type: String, required: true } }],
   },
@@ -34,7 +25,8 @@ const userSchema = Schema(
 userSchema.pre('save', async function(next) {
   const user = this;
   if (user.isModified('password')) {
-    user.password = await bcrypt.hash(user.password, 8);
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password, salt);
   }
   next();
 });
