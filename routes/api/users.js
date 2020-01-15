@@ -68,8 +68,7 @@ router.get('/:id', auth, async (req, res) => {
 router.patch('/me', auth, async (req, res) => {
   const validationErrors = [];
   const updates = Object.keys(req.body);
-  const profileUpdates = ['name', 'gender', 'location', 'website'];
-  const allowedUpdates = ['email', 'password', 'role', ...profileUpdates];
+  const allowedUpdates = ['name', 'email', 'password', 'role'];
   const isValidOperation = updates.every(update => {
     const isValid = allowedUpdates.includes(update);
     if (!isValid) validationErrors.push(update);
@@ -82,7 +81,6 @@ router.patch('/me', auth, async (req, res) => {
   try {
     const { user } = req;
     updates.forEach(update => {
-      if (profileUpdates.includes(update)) user.profile[update] = req.body[update];
       user[update] = req.body[update];
     });
 
@@ -101,8 +99,7 @@ router.patch('/me', auth, async (req, res) => {
 router.patch('/:id', auth, async (req, res) => {
   const validationErrors = [];
   const updates = Object.keys(req.body);
-  const profileUpdates = ['name', 'gender', 'location', 'website'];
-  const allowedUpdates = ['email', 'password', 'role', ...profileUpdates];
+  const allowedUpdates = ['name', 'email', 'password', 'role'];
   const isValidOperation = updates.every(update => {
     const isValid = allowedUpdates.includes(update);
     if (!isValid) validationErrors.push(update);
@@ -117,7 +114,6 @@ router.patch('/:id', auth, async (req, res) => {
     const user = await User.findById(_id);
     if (!user) return res.sendStatus(404);
     updates.forEach(update => {
-      if (profileUpdates.includes(update)) user.profile[update] = req.body[update];
       user[update] = req.body[update];
     });
     await user.save();
@@ -159,54 +155,4 @@ router.delete('/:id', auth, async (req, res) => {
   }
 });
 
-/**
- * @route   POST /users/login
- * @desc    Login a user
- * @access  Public
- */
-router.post('/login', async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const user = await User.findByCredentials(email, password);
-    const token = await user.generateAuthToken();
-    res.send({ user, token });
-  } catch (e) {
-    res.status(400).send({
-      error: { message: 'You have entered an invalid email or password' },
-    });
-  }
-});
-
-/**
- * @route   POST /users/logout
- * @desc    Logout a user
- * @access  Private
- */
-router.post('/logout', auth, async (req, res) => {
-  const { user } = req;
-  try {
-    user.tokens = user.tokens.filter(token => {
-      return token.token !== req.token;
-    });
-    await user.save();
-    res.send({ message: 'You have successfully logged out!' });
-  } catch (e) {
-    res.status(400).send(e);
-  }
-});
-
-/**
- * @route   POST /users/logoutAll
- * @desc    Logout a user from all devices
- * @access  Private
- */
-router.post('/logoutAll', auth, async (req, res) => {
-  try {
-    req.user.tokens = [];
-    await req.user.save();
-    res.send({ message: 'You have successfully logged out!' });
-  } catch (e) {
-    res.status(400).send(e);
-  }
-});
 module.exports = router;
