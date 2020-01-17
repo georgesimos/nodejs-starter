@@ -47,6 +47,13 @@ $ npm start
 $ npm run dev # with nodemon live update
 ```
 
+## Application Structure
+
+- <b>index.js</b> - The application entry point. This file defines our express server and connects it to MongoDB using mongoose. It also defines the api routes.
+- <b>config/ </b> - This folder contains configuration for mongoose and Auth middleware.
+- <b>models/</b> - This folder contains the Schema definitions for our Mongoose Models.
+- <b>routes/ </b> - This folder contains the route definitions for our API.
+
 ## Plugins
 
 nodejs-starter is currently extended with the following plugins. Instructions on how to use them in your own application are linked below.
