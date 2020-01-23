@@ -12,7 +12,7 @@ Nodejs Starter is a boilerplate for Node.js web applications built with:
 - [MongoDB](https://www.mongodb.com/) - A document-oriented, No-SQL database used to store the application data.
 - [ExpressJS](https://expressjs.com/) - fast node.js network app framework.
 - [nodeJS](https://nodejs.org/) - A JavaScript runtime built on Chrome's V8 JavaScript engine
-- Authentication with jsonwebtoken
+- Authentication with [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
 
 ## Features
 
