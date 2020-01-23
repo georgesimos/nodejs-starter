@@ -89,10 +89,6 @@ nodejs-starter is currently extended with the following plugins. Instructions on
 | morgan                 | [plugins/morgan/README.md](https://github.com/expressjs/morgan/blob/master/README.md)                                     |
 | nodemon                | [plugins/nodemon/README.md](https://github.com/remy/nodemon/blob/master/README.md)                                        |
 
-## Todos
-
-- Write Tests
-
 ## License
 
 MIT
