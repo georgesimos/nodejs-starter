@@ -49,10 +49,27 @@ $ npm run dev # with nodemon live update
 
 ## Application Structure
 
+```
+app
+├── config
+│   └── auth.js
+│   └── mongoose.js
+├── models
+│   └── Users
+├── routes
+│   └── api
+│    │   └── auth.js
+│    │   └── users.js
+│    └── index.js      
+└── index.js
+```
+
 - <b>index.js</b> - The application entry point. This file defines our express server and connects it to MongoDB using mongoose. It also defines the api routes.
 - <b>config/ </b> - This folder contains configuration for mongoose and Auth middleware.
 - <b>models/</b> - This folder contains the Schema definitions for our Mongoose Models.
 - <b>routes/ </b> - This folder contains the route definitions for our API.
+
+
 
 ## Plugins
 
